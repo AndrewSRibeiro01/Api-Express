@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.status(200).send("Gaguelson de ilhelson!!!");
+    res.status(200).send("API rodando com sucesso 👌💣🎆");
 });
 
 app.get("/livros", async (req, res) => {
