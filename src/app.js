@@ -1,6 +1,6 @@
 import express from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
-import livro from "./modelos/Livro.js";
+import { livro } from "./modelos/Livro.js";
 
 const conexao = await conectaNaDatabase();
 
@@ -20,8 +20,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/livros", async (req, res) => {
-    const listaLivros = await livro.find({});
-    res.status(200).json(listaLivros);
+    try {
+        const listaLivros = await livro.find({});
+        res.status(200).json(listaLivros);
+    } catch (error) {
+        res.status(400).json(error);
+    }
 });
 
 app.get("/livros/:id", (req, res) => {
@@ -29,8 +33,8 @@ app.get("/livros/:id", (req, res) => {
     res.status(200).json(livros[index]);
 });
 
-app.post("/livros", (req, res) => {
-    livros.push(req.body);
+app.post("/livros", async (req, res) => {
+    await livro.create(req.body);
     res.status(201).send("Livro cadastrado com sucesso");
 });
 
