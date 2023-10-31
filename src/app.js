@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.status(200).send("API rodando com sucesso 👌💣🎆");
+    res.status(200).send("<body style=background-color:black> <h2 style=color:white> API rodando com sucesso 👌💣🎆</h1>")
 });
 
 app.get("/livros", async (req, res) => {
