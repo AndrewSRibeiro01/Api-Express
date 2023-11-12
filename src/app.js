@@ -19,15 +19,6 @@ app.get("/", (req, res) => {
     res.status(200).send("<body style=background-color:black> <h2 style=color:white> API rodando com sucesso 👌💣🎆</h1>")
 });
 
-app.get("/livros", async (req, res) => {
-    try {
-        const listaLivros = await livro.find({});
-        res.status(200).json(listaLivros);
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
-
 app.get("/livros/:id", (req, res) => {
     const index = buscaLivro(req.params.id);
     res.status(200).json(livros[index]);
