@@ -1,6 +1,6 @@
 import express from "express";
 import conectaNaDatabase from "./config/dbConnect.js";
-import { livro } from "./modelos/Livro.js";
+import routes from "./modelos/routes/index.js";
 
 const conexao = await conectaNaDatabase();
 
@@ -13,11 +13,7 @@ conexao.once("open", () => {
 });
 
 const app = express();
-app.use(express.json());
-
-app.get("/", (req, res) => {
-    res.status(200).send("<body style=background-color:black> <h2 style=color:white> API rodando com sucesso 👌💣🎆</h1>")
-});
+routes(app);
 
 app.get("/livros/:id", (req, res) => {
     const index = buscaLivro(req.params.id);
